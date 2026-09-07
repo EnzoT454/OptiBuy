@@ -1,4 +1,8 @@
-# Template de site web pour IFT3150 — Projet informatique
+# OptiBuy — Projet IFT3150
+
+OptiBuy vise une application mobile iOS et Android pour gérer des recettes, planifier les repas et générer une liste d’achats par magasin à partir des promotions et des contraintes de l’utilisateur. Le dépôt contient actuellement la documentation issue du template IFT3150 ; le backend FastAPI, PostgreSQL et le mobile React Native/Expo restent à développer.
+
+## Site documentaire IFT3150
 
 Ce répertoire contient un **template de site web de projet pour le cours IFT3150**, construit avec **Zensical**.
 
