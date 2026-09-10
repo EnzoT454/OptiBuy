@@ -37,25 +37,36 @@ Il faut notamment regrouper les quantités, tenir compte des formats vendus et c
 
 Nous proposons **OptiBuy**, une application mobile qui utilise les recettes de l’utilisateur et les promotions des épiceries pour préparer une liste d’achats par magasin. L’utilisateur pourra choisir ses repas et préciser ses contraintes, comme son budget, le nombre maximal de magasins, les magasins préférés ou exclus et le rayon géographique.
 
-Notre objectif est de livrer une application fonctionnelle qui permet de :
-
-- créer, consulter, modifier et supprimer des recettes avec leurs ingrédients et quantités ;
-- saisir une recette en langage naturel, puis vérifier et corriger les ingrédients extraits par un modèle de langage avant de les enregistrer ;
-- sélectionner plusieurs recettes pour la semaine et obtenir une liste d’achats regroupée par magasin, avec un coût estimé ;
-- supprimer un article ou remplacer un produit proposé, puis mettre à jour les informations de la liste ;
-- recevoir des suggestions de recettes en fonction des promotions disponibles.
-
-Le parcours principal sera la sélection des recettes jusqu’à l’affichage de la liste d’achats. Par « optimisation », nous entendons chercher à réduire le coût des quantités réellement achetées tout en couvrant les besoins et en respectant les contraintes choisies. Nous ne visons pas nécessairement la meilleure solution mathématique possible. Si certains besoins ne sont pas couverts ou qu’aucune solution conforme n’est trouvée, l’application devra l’indiquer clairement.
+Le périmètre demandé le **10 septembre 2026** conserve tous les cas initiaux et ajoute comptes/profils, découverte assistée, historique, catalogue hors promotion, estimations et contributions après achat. Ces fonctions font partie du produit demandé ; la validation académique éventuelle reste distincte. Le dépôt contient actuellement la documentation, sans application ni backend implémentés.
 
 ### Cas d’utilisation
 
-**Gérer ses recettes.** L’utilisateur conserve ses recettes dans une bibliothèque pour pouvoir les retrouver et les réutiliser lors de futures planifications.
+**Gérer et découvrir des recettes.** Créer, consulter, modifier, supprimer, rechercher et marquer des recettes comme favorites. Quatre façons d’ajouter une recette sont prévues :
 
-**Créer une recette avec une aide à la saisie.** L’utilisateur écrit, par exemple, « curry de poulet : 500 g de poulet, 400 g de riz et deux oignons ». L’application propose une liste structurée d’ingrédients. L’utilisateur peut la modifier, ajouter ou supprimer des éléments, puis confirmer la sauvegarde. Aucun enregistrement n’est effectué automatiquement à partir du résultat du modèle.
+- **Saisir manuellement** : renseigner ingrédients, quantités, portions et préparation.
+- **Trouver une idée** : décrire son envie, choisir parmi plusieurs plats proposés par l’IA, puis modifier la recette complète obtenue.
+- **Cuisiner avec ce que j’ai** : fournir ses ingrédients et éventuellement leurs quantités ; voir les ingrédients présents, manquants et les quantités non vérifiables. Le backend calcule la compatibilité à partir des seules déclarations ; la présence ne prouve pas une quantité suffisante.
+- **Importer un texte** : extraire une recette existante en données structurées, puis corriger, ajouter ou supprimer des ingrédients.
 
-**Planifier les courses.** L’utilisateur choisit les recettes de la semaine. Si deux recettes demandent respectivement deux oignons et un oignon, l’application regroupe ce besoin en trois oignons. Elle compare ensuite les besoins aux produits disponibles et propose une liste par magasin selon les contraintes choisies. L’utilisateur peut ensuite modifier cette liste.
+L’analyse et la génération ne sauvegardent jamais automatiquement une recette. Une confirmation explicite est nécessaire. Les comptes et profils permettent de conserver des données privées et des préférences ; les autorisations seront contrôlées côté serveur.
 
-**Trouver des idées de repas.** L’utilisateur consulte des suggestions liées aux promotions. Par exemple, des offres sur le poulet, les poivrons et le riz peuvent orienter les recommandations vers des recettes utilisant ces ingrédients. Une méthode simple de classement sera suffisante pour la première version.
+**Planifier les courses.** Sauvegarder une semaine, ses repas et portions, consulter les semaines passées et générer une liste modifiable par magasin. L’application regroupe les besoins, tient compte des formats réellement achetés et applique budget, nombre de magasins, préférences/exclusions, rayon, alimentation, produits et formats. Cocher, supprimer ou remplacer un article reste possible ; le backend recalcule prix, couverture et contraintes. La régénération doit conserver les choix manuels ou signaler un conflit, sans les annuler silencieusement.
+
+Les plans et listes conserveront des instantanés des recettes, portions et prix retenus. Modifier ensuite une recette ou un prix ne changera pas les résultats historiques.
+
+**Découvrir des repas économiques.** Conserver [la référence Figma](https://www.figma.com/design/GZnafkmCJzWu1gyl6ZamgP), l’accueil, les cinq onglets **Accueil · Recettes · Calendrier · Promos · Paramètres**, l’organisation du calendrier et l’accès à la liste par magasin. Dans Recettes, placer **Toutes · Favoris · Rapides · Petit budget** en haut. Petit budget proposera des recettes selon les prix/promotions avec une justification compréhensible, sans économies chiffrées faute de référence valable. Français québécois, CAD, accent vert, sobriété et états vide/chargement/erreur seront conservés.
+
+### Promotions, prix et incertitude
+
+L’IA aura trois responsabilités séparées : générer des suggestions/recettes, extraire une recette fournie et extraire les informations de circulaires. Les circulaires passeront par une validation avant intégration, en conservant source, magasins, formats, prix, conditions et dates. Les valeurs illisibles ou ambiguës resteront signalées. Import manuel initial, traitement reproductible, détection des doublons et jeu de secours identifié sont prévus.
+
+Distinguer période des repas, date prévue d’achat, validité des offres et publication/récupération des données. Le cycle visé est jeudi–mercredi ; une vérification mercredi soir peut être prévue, mais ne prouve pas que les offres futures sont publiées. Aucune offre expirée ne sera réutilisée silencieusement.
+
+Le catalogue couvrira aussi les produits hors promotion. Distinguer prix commercial connu et sourcé, prix déclaré lors d’un achat, prix estimé avec fourchette/méthode/provenance et prix inconnu. Les références initiales seront documentées ; les observations comparables pourront alimenter une méthode statistique simple. Le LLM n’inventera pas de prix ; une estimation ne prouve pas le stock en magasin.
+
+Après achat d’un article estimé, la question facultative « Quel prix avez-vous payé ? » permettra de déclarer produit, format, magasin, date, quantité, total et conditions. Taxes/consignes et prix unitaires seront distingués. Validation, doublons, valeurs aberrantes et vieillissement seront traités ; une déclaration seule ne remplacera pas une référence. Les estimations communes ne révéleront ni identité ni historique personnel.
+
+Le parcours planification → liste reste prioritaire. L’optimisation cherchera à réduire le coût des quantités achetées sans garantie d’optimum global. Le résultat séparera couverture complète/partielle, contraintes respectées/non respectées/non vérifiables, prix connus/estimés/inconnus et disponibilité des promotions. Liste partielle, aucune solution trouvée et promotions indisponibles pourront se combiner. Avec des estimations, afficher une fourchette et l’incertitude sur le budget, sans le garantir à partir d’une moyenne. La comparaison proposée utilise la borne haute des paniers calculables après contrôle de couverture et de contraintes ; un prix inconnu ne vaut pas zéro.
 
 ### Architecture et technologies
 
@@ -66,8 +77,8 @@ L’application sera organisée autour d’une interface mobile, d’un backend 
 | Application mobile | React Native, TypeScript et Expo | Afficher les écrans et gérer les interactions sur iOS et Android avec une base de code commune |
 | Backend | Python et FastAPI | Fournir l’API et traiter les recettes, les promotions, les contraintes et les listes d’achats |
 | Validation | Pydantic | Vérifier la structure des données échangées avec le backend |
-| Base de données | PostgreSQL | Conserver les recettes et les autres données nécessaires à l’application |
-| Modèle de langage | Fournisseur à sélectionner | Transformer une recette écrite en langage naturel en données structurées |
+| Base de données | PostgreSQL | Conserver comptes, recettes, plans/historique, catalogue, prix et listes |
+| Modèle de langage | Fournisseur à sélectionner | Générer des recettes et extraire recettes/circulaires, avec validation backend |
 | Versionnement | Git et GitHub | Suivre les modifications et faciliter le travail en équipe |
 | Documentation | Zensical | Présenter le projet et documenter son avancement |
 
@@ -75,31 +86,29 @@ Le mobile communiquera avec FastAPI par une API HTTP utilisant des données JSON
 
 ### Méthodologie
 
-Nous développerons le projet progressivement sur environ 15 semaines, à raison d’environ 20 heures par semaine par personne. Nous commencerons par connecter l’application mobile à un backend minimal, puis nous ajouterons la gestion des recettes, la saisie assistée, les promotions et la génération des listes. Les recommandations viendront compléter ce parcours.
+Le plan vise **15 semaines, deux étudiants à 15 h par semaine chacun, soit 450 h théoriques**. Il réserve 300 h au produit, tests et intégration, 45 h aux réunions/suivi/documentation, 45 h aux imprévus et 60 h à la finalisation protégée en semaines 14–15. Ces enveloppes ne garantissent pas que toutes les fonctionnalités tiennent dans la capacité ; l’extension représente un risque de charge élevé.
 
-Les tâches pourront être réparties entre les deux membres lorsque les modules sont indépendants. Par exemple, la préparation des données de promotions pourra avancer en parallèle de l’intégration du modèle de langage. Nous intégrerons régulièrement les différentes parties et ajouterons des tests au fur et à mesure. Une partie du temps sera réservée à la documentation, aux corrections et à la préparation de la démonstration.
+Le premier jalon demeure mobile → `GET /health` → FastAPI. Comptes et persistance précèdent les recettes privées et les plans ; catalogue et circulaires validées précèdent estimations et génération de listes. Les fournisseurs IA seront comparés sur les trois tâches avant sélection ; la solution standard d’authentification sera choisie et documentée avant intégration. Les algorithmes, schémas et routes restent des propositions jusqu’à validation technique.
 
-Avant de choisir le fournisseur LLM, nous comparerons plusieurs options sur un petit ensemble commun de recettes. Nous vérifierons les ingrédients extraits, les quantités, les unités, le format des réponses, le temps de réponse et le coût des appels.
-
-Nous examinerons aussi les sources de promotions et leur disponibilité pour la période visée. Un jeu de données de secours sera prévu pour permettre les tests et la démonstration si la collecte automatique n’est pas fiable. Les correspondances entre ingrédients et produits seront développées à partir de cas simples, puis étendues aux formats et aux situations pris en charge.
+Des revues de capacité sont prévues en fin de semaines 2, 6 et 10. Un import manuel, des sources/formats limités et documentés et des méthodes simples réduisent la profondeur technique sans supprimer les cas d’utilisation. Si cela ne suffit pas, une capacité supplémentaire ou un phasage doit être convenu explicitement, avec validation académique si nécessaire.
 
 ### Validation et Évaluation
 
-Nous évaluerons l’application à partir de scénarios d’utilisation complets : créer une recette, la retrouver, la modifier, sélectionner les repas d’une semaine, générer une liste et changer un article. Ces parcours seront vérifiés sur iOS et Android, avec une attention aux messages d’erreur et à la clarté des résultats.
+Les tests prévus couvrent isolation entre utilisateurs, recettes sauvegardées seulement après confirmation, erreurs IA, compatibilité sans quantités, extraction et doublons de circulaires, dates des offres, conversions/formats, portions et couverture, estimations/contributions, recalcul et choix manuels, stabilité de l’historique. Les parcours seront vérifiés sur iOS et Android avec états vide/chargement/erreur.
 
-Les tests automatisés porteront principalement sur la validation des recettes, la sauvegarde après confirmation, l’agrégation des ingrédients, les conversions d’unités compatibles, les prix et le respect des contraintes. Nous vérifierons aussi les cas où un produit est introuvable, où le budget ne permet pas de couvrir les besoins et où une modification rend la liste incomplète.
+De petits jeux contrôlés permettront de comparer les paniers à une référence calculable manuellement. Les tests courants simuleront les réponses IA ; la démonstration utilisera au besoin un jeu de secours identifié. Aucune évaluation fonctionnelle n’a encore été réalisée dans ce dépôt.
 
-Pour évaluer la génération des listes, nous utiliserons de petits jeux de données dont les résultats peuvent être vérifiés manuellement. Nous comparerons le coût et la couverture des besoins à une méthode de référence simple. Cela permettra de vérifier l’utilité de la solution sans affirmer qu’elle fournit toujours un optimum global.
+## Échéancier proposé
 
-Pour le parsing des recettes, nous mesurerons les réponses structurées valides ainsi que les erreurs ou omissions d’ingrédients, de quantités et d’unités. Les tests courants utiliseront des réponses simulées afin de ne pas dépendre d’appels payants. Enfin, la démonstration finale devra montrer le parcours principal de bout en bout, en précisant les fonctionnalités réalisées et les limites restantes.
+Les semaines sont relatives au démarrage effectif ; les anciennes dates d’exemple du template ne constituent pas un calendrier validé. Le [suivi](suivi.md) rapporte uniquement le travail effectivement réalisé.
 
-## Échéancier
-
-!!! info
-    Le suivi complet est disponible dans la page [Suivi de projet](suivi.md).
-
-| Activités                      | Début   |   Fin   | Livrable                            | Statut      |
-|--------------------------------|---------|---------|-------------------------------------|-------------|
-| Ouverture de projet            | 4 mai   | 15 mai  | Proposition de projet               | ✅ Terminé  |
-| Études préliminaires           | 4 mai   | 22 mai  | Document d'analyse                  | 🔄 En cours |
-| Présentation + Rapport         | 7 aout  | 14 aout | Présentation + Rapport              | ⏳ À venir  |
+| Période | Livrable prévu | Statut |
+| --- | --- | --- |
+| S1–2 | Mobile → /health, choix comptes/persistance et exploration des données | À développer |
+| S3–4 | Comptes, recettes manuelles, recherche/favoris et calendrier sauvegardé | À développer |
+| S5–6 | Modes IA de recettes avec confirmation | À développer |
+| S7–8 | Catalogue, circulaires validées et données de secours | À développer |
+| S9–10 | Estimations, contributions et première génération backend | À développer |
+| S11–12 | Listes mobiles modifiables, régénération et historique | À développer |
+| S13 | Petit budget et consolidation des parcours | À développer |
+| S14–15 | Tests finaux, corrections, rapport et démonstration — 60 h protégées | À venir |

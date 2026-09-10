@@ -1,6 +1,12 @@
 # OptiBuy — Projet IFT3150
 
-OptiBuy vise une application mobile iOS et Android pour gérer des recettes, planifier les repas et générer une liste d’achats par magasin à partir des promotions et des contraintes de l’utilisateur. Le dépôt contient actuellement la documentation issue du template IFT3150 ; le backend FastAPI, PostgreSQL et le mobile React Native/Expo restent à développer.
+OptiBuy vise une application mobile iOS et Android pour gérer et découvrir des recettes, planifier les repas et générer une liste d’achats modifiable par magasin. Le périmètre demandé comprend aussi les comptes et profils, quatre modes d’ajout de recette, l’historique des semaines, les circulaires, un catalogue hors promotion, les estimations de prix et les contributions facultatives après achat.
+
+**État au 10 septembre 2026 :** seuls le site documentaire et les documents de cadrage existent. Le backend FastAPI/Pydantic, PostgreSQL et le mobile React Native/TypeScript/Expo restent à développer. Cette mise à jour n’installe aucune dépendance et n’implémente aucune fonctionnalité.
+
+Avant tout travail, consulter [les consignes](tools/AGENTS.md), [l’architecture](tools/ARCHITECTURE.md), [l’API proposée](tools/API.md), [les décisions](tools/DECISIONS.md) et [les tâches](tools/TASKS.md). Ces documents sont présents localement dans `tools/`, actuellement ignoré par Git ; ils ne sont donc pas inclus automatiquement dans un clone.
+
+La référence visuelle reste [le fichier Figma OptiBuy](https://www.figma.com/design/GZnafkmCJzWu1gyl6ZamgP), avec les onglets Accueil, Recettes, Calendrier, Promos et Paramètres. Le parcours planification → liste demeure prioritaire. Le plan couvre 15 semaines et 450 heures théoriques pour l’équipe, avec une réserve explicite ; l’extension demandée ne vaut pas validation académique. Premier jalon : mobile → `GET /health` → FastAPI.
 
 ## Site documentaire IFT3150
 
@@ -103,9 +109,9 @@ zensical build --clean
 
 ## Déploiement sur GitHub Pages
 
-Le template utilise **GitHub Actions** pour construire et publier automatiquement le site sur GitHub Pages.
+Le template prévoit **GitHub Actions** pour construire et publier le site sur GitHub Pages. Dans l’état actuel de ce dépôt, le dossier `.github/` et le workflow ci-dessous sont absents : ces instructions décrivent une configuration à mettre en place, pas un déploiement déjà opérationnel.
 
-Le workflow de déploiement se trouve dans :
+Le chemin prévu pour le workflow de déploiement est :
 
 ```text
 .github/workflows/docs.yml
@@ -197,7 +203,7 @@ Vous pouvez ajouter des pages ou réorganiser la navigation lorsque cela est per
 
 ## Licence
 
-Ce template est distribué sous licence MIT. Consultez le fichier `LICENSE` pour plus de détails.
+Le README du template annonce une licence MIT. Aucun fichier `LICENSE` n’est présent dans ce dépôt local ; les informations de licence restent à compléter.
 
 ## Questions ou problèmes ?
 

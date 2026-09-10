@@ -1,5 +1,5 @@
 ---
-title: Travail réalisé
+title: Références
 ---
 
 <style>
@@ -12,79 +12,23 @@ title: Travail réalisé
 
 # Références
 
-> :bulb: Cette page rassemble les **principales sources et ressources utilisées dans le cadre du projet**.  
-> 
-> Elle permet également de préciser **comment ces ressources ont contribué au travail réalisé**.
+## Sources du cadrage
 
+- **Demande produit du 10 septembre 2026**, fournie par le responsable du dépôt. Source des ajouts de périmètre, des exigences visuelles, des règles de prix/historique/confidentialité et de la capacité de 450 h. Cette demande ne constitue pas à elle seule une validation académique.
+- **Documents locaux OptiBuy** : `tools/AGENTS.md`, `ARCHITECTURE.md`, `API.md`, `DECISIONS.md` et `TASKS.md`, ainsi que le README. Utilisés pour conserver les cas initiaux et distinguer décisions acceptées, propositions techniques et implémentation absente. `tools/` est actuellement ignoré par Git et n’est pas publié avec le site.
+- **[Figma OptiBuy](https://www.figma.com/design/GZnafkmCJzWu1gyl6ZamgP)**. Référence visuelle désignée par l’utilisateur pour l’accueil, les cinq onglets, le calendrier et les listes ; la révision documentaire reprend les exigences fournies sans attester d’une inspection visuelle ni modifier la maquette.
+- **Template documentaire IFT3150 présent dans le dépôt**. Structure conservée pour présentation, suivi, synthèse et références ; les entrées de suivi et dates d’exemple ne sont pas des réalisations du projet.
 
-## Références utilisées
+## Sources de données et technologies à documenter
 
-> Selon la nature du projet, vous pouvez notamment référencer :
->
-> * articles scientifiques ou techniques ;
-> * livres et ouvrages de référence ;
-> * documentation officielle ;
-> * normes et spécifications ;
-> * bibliothèques, frameworks et outils importants ;
-> * jeux de données et API ;
-> * projets ou solutions existantes étudiées ;
-> * rapports, études ou publications institutionnelles ;
-> * ressources Web pertinentes.
->
-> Il n'est pas nécessaire de répertorier chaque page consultée. Privilégiez les références qui ont **réellement soutenu, orienté ou influencé votre travail**.
+Aucune source de circulaires, aucun catalogue de découverte, fournisseur IA ou fournisseur d’authentification n’est encore sélectionné dans cette révision. Aucune référence de prix réelle n’est inventée pour initialiser les estimations.
 
-### Présentation des références
+Avant intégration, consigner pour chaque source son nom, son URL/document, la date de consultation ou de collecte, la couverture géographique/temporelle, les conditions d’utilisation et son rôle. Pour un prix, ajouter produit, format, magasin, devise, conditions commerciales et niveau de correspondance. Pour les circulaires, garder aussi publication/récupération, validité et page d’origine ; pour les données de secours, indiquer explicitement leur nature démonstrative.
 
-> Pour chaque référence importante, fournissez :
->
-> * les informations permettant d'identifier et de retrouver la source ;
-> * une courte justification de **1 à 2 phrases** expliquant son rôle dans le projet.
->
-> La justification peut notamment indiquer si la référence a servi à :
->
-> * comprendre le problème ;
-> * comparer des approches ;
-> * orienter un choix technique ;
-> * concevoir ou implémenter une solution ;
-> * définir une méthode d'évaluation ;
-> * interpréter des résultats.
+Les décisions d’authentification et les comparaisons IA devront citer la documentation officielle consultée au moment du choix. Les seuils statistiques et conventions proposés dans le cadrage sont des hypothèses à calibrer sur les données, pas des résultats publiés ou déjà validés.
 
-### Exemple
+## Utilisation de l’intelligence artificielle
 
-> **Mozilla Developer Network.** *Web APIs*.
-> https://developer.mozilla.org/
->
-> Cette documentation a été utilisée comme référence principale pour comprendre le fonctionnement des API Web exploitées dans l'application et valider certains choix d'implémentation.
+**Codex — OpenAI, 10 septembre 2026.** Assistance à la lecture du dépôt et à la mise à jour de la documentation à partir de la demande utilisateur. Les textes ont été confrontés au contenu local et à l’état réel du dépôt ; aucune application, dépendance ou intégration fournisseur n’a été créée. Les propositions de contrats et méthodes restent à valider avant implémentation.
 
-> **Nom de l'auteur.** *Titre de l'article*. Nom de la publication, année.
->
-> Cet article a permis de comparer différentes approches au problème étudié et a contribué au choix de la méthode retenue dans le projet.
-
-## Utilisation de l'intelligence artificielle
-
-> Documentez les principaux usages de **systèmes d'intelligence artificielle générative ou d'assistants basés sur des modèles de langage** dans le cadre du projet.
->
-> L'objectif n'est pas de retranscrire l'ensemble des conversations ou requêtes effectuées, mais de rendre explicite **le rôle joué par ces outils dans votre démarche**.
-
-### Pour chaque outil utilisé
-
-> Indiquez, lorsque pertinent :
->
-> * le nom de l'outil ou du modèle utilisé ;
-> * les principales tâches pour lesquelles il a été employé ;
-> * la manière dont les résultats produits ont été vérifiés, adaptés ou intégrés au projet ;
-> * les limites ou problèmes rencontrés lors de son utilisation.
-
-### Exemple
-
-> **ChatGPT — OpenAI**
->
-> Utilisé principalement pour explorer différentes stratégies de traitement des données et générer des pistes d'implémentation. Les propositions obtenues ont été vérifiées à partir de la documentation officielle et adaptées à l'architecture du projet avant leur intégration.
-
-> **GitHub Copilot**
->
-> Utilisé ponctuellement pour assister la rédaction de code répétitif et de tests. Le code généré a été révisé et testé par l'équipe avant d'être conservé dans le projet.
-
-## Références
-
-> Ajoutez vos références ci-dessous en utilisant une présentation cohérente.
+Cet usage d’assistance documentaire est distinct des trois usages IA prévus dans le produit : génération de recettes, extraction de recettes et extraction de circulaires. Aucun fournisseur produit n’est retenu et aucune performance n’a été mesurée. Documenter les futurs modèles/configurations, jeux d’essai, erreurs observées, coûts et corrections réellement effectuées.

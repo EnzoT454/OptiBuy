@@ -11,82 +11,32 @@ title: Synthèse
 </style>
 
 
-# Évaluation
+# Synthèse
 
-> :bulb: Cette page présente une vue d'ensemble du projet, depuis les études réalisées avant le développement jusqu'au bilan final.
-> Elle ne remplace pas le rapport final. Elle permet plutôt de documenter progressivement les principales décisions, réalisations et conclusions du projet.
+État documentaire au **10 septembre 2026**. Cette page distingue les choix de cadrage des réalisations ; elle sera complétée avec les résultats effectifs et ne remplace pas le rapport final.
 
-## Structure suggérée
+## 1. Études préliminaires
 
-> La structure suivante est donnée à titre indicatif.  
-> Vous pouvez l’adapter selon la nature du projet.
+Le besoin central est de passer de recettes et repas hebdomadaires à une liste d’achats modifiable par magasin, sous contraintes. Le cadrage a été élargi aux comptes, aux quatre modes d’ajout, à l’historique, aux circulaires structurées et aux prix hors promotion avec contributions facultatives.
 
-### 1. Études préliminaires
+L’architecture cible conserve React Native/TypeScript/Expo, FastAPI/Pydantic et PostgreSQL. Trois responsabilités IA sont séparées : génération de recettes, extraction de recettes fournies et extraction de circulaires. La confirmation utilisateur précède toute sauvegarde de recette générée ou analysée ; les calculs restent déterministes côté backend.
 
-> Présentez les travaux qui ont permis de **mieux comprendre le problème et d'orienter le projet**.
->
-> Selon votre projet, cela peut notamment comprendre :
->
-> * l'analyse du contexte et du problème ;
-> * l'étude des besoins ou des utilisateurs ;
-> * l'exploration d'une base de code, de données ou d'une infrastructure existante ;
-> * l'étude de solutions, outils ou technologies existants ;
-> * des prototypes ou expérimentations exploratoires ;
-> * l'analyse de contraintes techniques ou organisationnelles ;
-> * les choix de conception ou d'approche qui en découlent.
->
-> Il ne s'agit pas de documenter toutes vos recherches, mais de présenter les éléments qui ont **réellement influencé la direction prise par le projet**.
+Les principaux risques identifiés sont la correspondance ingrédients/produits/formats, la disponibilité et la qualité des offres, l’incertitude des prix, l’isolation des comptes et la stabilité historique. Des règles et contrats sont proposés dans le cadrage local, mais aucune comparaison de fournisseurs, calibration statistique ou étude utilisateur n’est encore rapportée comme réalisée.
 
-### 2. Réalisation
+## 2. Réalisation
 
-> Présentez les principales **contributions réalisées durant le projet**.
->
-> Selon la nature du projet, il peut s'agir par exemple :
->
-> * de fonctionnalités développées ;
-> * d'un prototype ou d'une preuve de concept ;
-> * d'une architecture ou d'une infrastructure mise en place ;
-> * d'un traitement ou d'une transformation de données ;
-> * d'une API, d'un outil ou d'un service ;
-> * d'une amélioration apportée à un système existant ;
-> * d'une expérimentation technique ;
-> * d'une démarche de conception ou de modélisation.
->
-> Présentez les éléments les plus importants ainsi que les principaux choix ayant orienté leur réalisation.
->
-> L'objectif est de montrer **ce qui a effectivement été accompli**, et non de dresser simplement la liste des tâches réalisées.
+Le dépôt contient le site documentaire Zensical et les documents de cadrage. La révision du 10 septembre harmonise objectifs, architecture, contrats candidats, décisions, tâches et suivi. La référence Figma et les cinq onglets sont conservés dans les exigences ; aucun écran n’est implémenté par cette révision.
 
-### 3. Évaluation
+Le backend, le mobile, PostgreSQL, l’authentification et les intégrations IA restent à développer. Le premier jalon prévu est mobile → `GET /health` → FastAPI.
 
-> Présentez comment vous avez **vérifié, testé, évalué ou validé** les résultats du projet.
->
-> La forme de l'évaluation dépend fortement de la nature du projet. Elle peut notamment reposer sur :
->
-> * des tests fonctionnels ou automatisés ;
-> * des scénarios d'utilisation ;
-> * des tests utilisateurs ;
-> * des mesures de performance ;
-> * l'analyse de données ou de résultats ;
-> * une comparaison avec une solution existante ;
-> * des expérimentations ;
-> * une validation auprès du superviseur, d'utilisateurs ou d'un partenaire ;
-> * l'étude de cas représentatifs.
->
-> Présentez les principaux résultats obtenus et ce qu'ils permettent de conclure.
->
-> Lorsque certaines réalisations n'ont pas pu être évaluées formellement, indiquez clairement **ce qui a pu être vérifié et ce qui reste à valider**.
+## 3. Évaluation
 
-### 4. Bilan
+Aucun résultat de test applicatif ou gain économique mesuré n’est disponible. La validation future couvrira les parcours iOS/Android, l’isolation entre comptes, la confirmation avant sauvegarde, les erreurs IA, les dates et doublons de circulaires, les conversions et formats, les estimations/contributions, la couverture et les contraintes, le recalcul et la conservation de l’historique.
 
-> Prenez du recul sur l'ensemble du projet.
->
-> Présentez notamment :
->
-> * les principales contributions du projet ;
-> * les objectifs atteints, partiellement atteints ou non atteints ;
-> * les forces et limites du résultat obtenu ;
-> * les difficultés ou contraintes importantes rencontrées ;
-> * les apprentissages techniques ou méthodologiques réalisés ;
-> * les éléments qui mériteraient d'être poursuivis ou améliorés.
->
-> Le bilan doit permettre de comprendre **où en est réellement le projet à la fin de la session**, ce qui a été appris et quelles seraient les prochaines étapes pertinentes.
+Les paniers seront comparés sur des cas contrôlés à une référence vérifiable manuellement. La compatibilité distinguera présence d’un ingrédient et quantité suffisante. Les estimations conserveront provenance et fourchette sans garantir stock ou budget. Les tests courants utiliseront des réponses IA simulées et un catalogue de secours identifié.
+
+## 4. Bilan provisoire
+
+Le cadrage demandé est documenté ; la réalisation du produit reste à faire. Les 450 h théoriques comprennent 300 h produit/tests/intégration, 45 h réunions/documentation, 45 h de marge et 60 h de finalisation protégée. La charge est élevée et devra être réestimée aux jalons, sans reclasser les ajouts en bonus.
+
+Restent notamment à choisir la solution standard d’authentification, les fournisseurs IA, les sources du catalogue/circulaires/recettes et les conventions techniques détaillées. Les règles proposées de prix, historique et optimisation doivent être validées avant codage. Une validation académique éventuelle du périmètre élargi reste distincte de la demande produit.
