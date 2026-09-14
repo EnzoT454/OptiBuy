@@ -4,9 +4,8 @@ OptiBuy vise une application mobile iOS et Android pour gérer et découvrir des
 
 **État au 10 septembre 2026 :** seuls le site documentaire et les documents de cadrage existent. Le backend FastAPI/Pydantic, PostgreSQL et le mobile React Native/TypeScript/Expo restent à développer. Cette mise à jour n’installe aucune dépendance et n’implémente aucune fonctionnalité.
 
-Avant tout travail, consulter [les consignes](tools/AGENTS.md), [l’architecture](tools/ARCHITECTURE.md), [l’API proposée](tools/API.md), [les décisions](tools/DECISIONS.md) et [les tâches](tools/TASKS.md). Ces documents sont présents localement dans `tools/`, actuellement ignoré par Git ; ils ne sont donc pas inclus automatiquement dans un clone.
 
-La référence visuelle reste [le fichier Figma OptiBuy](https://www.figma.com/design/GZnafkmCJzWu1gyl6ZamgP), avec les onglets Accueil, Recettes, Calendrier, Promos et Paramètres. Le parcours planification → liste demeure prioritaire. Le plan couvre 15 semaines et 450 heures théoriques pour l’équipe, avec une réserve explicite ; l’extension demandée ne vaut pas validation académique. Premier jalon : mobile → `GET /health` → FastAPI.
+La référence visuelle reste [le fichier Figma OptiBuy](https://www.figma.com/design/GZnafkmCJzWu1gyl6ZamgP), avec les onglets Accueil, Recettes, Calendrier, Promos et Paramètres. Le parcours planification → liste demeure prioritaire. 
 
 ## Site documentaire IFT3150
 
