@@ -177,3 +177,7 @@ cython_debug/
 /tools/
 
 .DS_Store
+
+# Data items et prix
+/data/
+
