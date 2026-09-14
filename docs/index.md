@@ -14,7 +14,7 @@ title: Vue d'ensemble du projet
 
 !!! info "Informations générales"
     **Session**: Automne 2026  
-    **Auteur(s)**: Hamza Aqel (20111814), Nouh Harfouche ()<!-- Nom de chaque membre (matricule)  -->  
+    **Auteur(s)**: Hamza Aqel (20111814), Nouh Harfouche (20262136)<!-- Nom de chaque membre (matricule)  -->  
     **Thème(s)**: Développement, innovation<!-- Thèmes principaux abordés dans le projet  -->  
     **Superviseur(s)**: Louis-Edouard Lafontant<!-- Nom du superviseur (affiliation)  -->  
     **Collaborateur(s):** <!-- Nom de(s) collaborateur(s) et partenaire(s)` -->  
