@@ -12,8 +12,9 @@ title: Références
 
 # Références
 
-- **Template du cours IFT3150** : structure du site de suivi.
-- **Consignes du cours** : préparation de la description du projet.
+- **[Template du cours IFT3150](https://github.com/udem-diro/template-projet)** : structure du site de suivi.
+- **Plan et consignes du cours IFT3150** : description du projet, suivi régulier et critères d’évaluation.
+- **[Documentation Zensical](https://zensical.org/docs/publish-your-site/)** : construction et publication du site sur GitHub Pages.
 - **[Maquette OptiBuy sur Figma](https://www.figma.com/design/GZnafkmCJzWu1gyl6ZamgP)** : référence prévue pour l’interface mobile.
 
 Les références techniques et les sources de données seront ajoutées au fil du développement.
