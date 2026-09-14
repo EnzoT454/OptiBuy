@@ -175,3 +175,5 @@ cython_debug/
 
 # Local project guidance
 /tools/
+
+.DS_Store
