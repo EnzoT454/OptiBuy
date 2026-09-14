@@ -1,209 +1,74 @@
 # OptiBuy — Projet IFT3150
 
-OptiBuy vise une application mobile iOS et Android pour gérer et découvrir des recettes, planifier les repas et générer une liste d’achats modifiable par magasin. Le périmètre demandé comprend aussi les comptes et profils, quatre modes d’ajout de recette, l’historique des semaines, les circulaires, un catalogue hors promotion, les estimations de prix et les contributions facultatives après achat.
+OptiBuy est un projet d’application mobile pour gérer des recettes, planifier les repas et préparer une liste d’épicerie par magasin selon un budget. Le dépôt contient actuellement le site de suivi ; l’application reste à développer.
 
-**État au 10 septembre 2026 :** seuls le site documentaire et les documents de cadrage existent. Le backend FastAPI/Pydantic, PostgreSQL et le mobile React Native/TypeScript/Expo restent à développer. Cette mise à jour n’installe aucune dépendance et n’implémente aucune fonctionnalité.
+Projet réalisé par **Hamza Aqel et Nouh Harfouche**, à l’Université de Montréal, à l’automne 2026.
 
+## Site de suivi
 
-La référence visuelle reste [le fichier Figma OptiBuy](https://www.figma.com/design/GZnafkmCJzWu1gyl6ZamgP), avec les onglets Accueil, Recettes, Calendrier, Promos et Paramètres. Le parcours planification → liste demeure prioritaire. 
+**Adresse prévue après activation et premier déploiement :** [enzot454.github.io/OptiBuy](https://enzot454.github.io/OptiBuy/).
 
-## Site documentaire IFT3150
+C’est le lien du site publié qu’il faudra déposer sur StudiUM. Vérifier qu’il fonctionne sans connexion à GitHub avant de le remettre.
 
-Ce répertoire contient un **template de site web de projet pour le cours IFT3150**, construit avec **Zensical**.
+Le site reprend le [template IFT3150](https://github.com/udem-diro/template-projet) et utilise **Zensical** pour transformer les fichiers Markdown en pages web.
 
-Le site accompagne le projet tout au long de la session. Il sert notamment à :
+| Fichier | Contenu |
+| --- | --- |
+| `docs/index.md` | Contexte, problématique, proposition, méthodologie et évaluation |
+| `docs/suivi.md` | Avancées, difficultés, choix et prochaines étapes |
+| `docs/synthese.md` | Réalisations, résultats et bilan, à compléter progressivement |
+| `docs/references.md` | Sources utilisées et aide de l’IA |
+| `zensical.toml` | Nom du site, adresse et navigation |
+| `.github/workflows/docs.yml` | Vérification et publication automatiques |
 
-* présenter le projet et ses objectifs ;
-* documenter son évolution et le travail réalisé ;
-* synthétiser les études, réalisations et résultats obtenus ;
-* conserver les principales références et ressources utilisées ;
-* centraliser la documentation de l'équipe dans un format clair et accessible.
+À ce stade, la remise porte sur la vue d’ensemble. Les autres pages restent courtes et seront complétées au fil du projet.
 
-## Prérequis
+## Consulter le site en local
 
-Assurez-vous d'avoir les outils suivants installés :
-
-* Python **3.11** ou plus récent ;
-* `pip`, le gestionnaire de paquets Python ;
-* Git, pour cloner et versionner le projet.
-
-## Installation
-
-### 1. Récupérer le template
-
-Clonez le dépôt :
+Prérequis : **Python 3.11 ou plus récent** et Git. Depuis un terminal macOS ou Linux :
 
 ```bash
-git clone git@github.com:udem-diro/template-projet.git
-```
-
-Puis placez-vous dans le répertoire du projet :
-
-```bash
-cd template-projet
-```
-
-Vous pouvez ensuite renommer le dossier ou associer le projet à votre propre dépôt Git.
-
-### 2. Installer les dépendances
-
-Installez les dépendances du projet :
-
-```bash
-pip install -r requirements.txt
-```
-
-Cette commande installe notamment **Zensical**, utilisé pour construire et prévisualiser le site.
-
-## Utilisation
-
-Vous devez au minimum :
-
-1. modifier les pages Markdown dans le dossier `docs/` ;
-2. adapter la présentation et la description du projet ;
-3. maintenir le suivi du travail réalisé durant la session ;
-4. compléter progressivement la synthèse et les références.
-
-Le contenu fourni dans le template sert de **structure de départ**. Adaptez-le à la nature de votre projet.
-
-### Travailler en local
-
-Pour lancer le site sur votre poste :
-
-```bash
+git clone git@github.com:EnzoT454/OptiBuy.git
+cd OptiBuy
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
 zensical serve
 ```
 
-Le site sera accessible à l'adresse :
+Ouvrir ensuite `http://localhost:8000`. Les modifications des pages sont prises en compte automatiquement. Si le dépôt est déjà cloné, commencer à la création ou à l’activation de `.venv`.
 
-```text
-http://localhost:8000
-```
-
-Les modifications apportées aux fichiers du dossier `docs/` sont automatiquement prises en compte lors du développement.
-
-Vous pouvez également demander à Zensical d'ouvrir automatiquement le site dans votre navigateur :
-
-```bash
-zensical serve --open
-```
-
-## Construction du site
-
-Pour générer la version statique du site :
-
-```bash
-zensical build
-```
-
-Les fichiers générés sont placés par défaut dans le dossier `site/`.
-
-Pour reconstruire complètement le site en supprimant les données de construction précédentes :
+Pour vérifier la construction complète :
 
 ```bash
 zensical build --clean
 ```
 
-> Cette étape n'est généralement pas nécessaire lorsque vous travaillez avec `zensical serve`, mais elle peut être utile pour vérifier la version finale du site.
+Le dossier `site/` contient le résultat généré. Il est ignoré par Git et ne doit pas être modifié à la main.
 
-## Déploiement sur GitHub Pages
+## Activer la publication sur GitHub
 
-Le template prévoit **GitHub Actions** pour construire et publier le site sur GitHub Pages. Dans l’état actuel de ce dépôt, le dossier `.github/` et le workflow ci-dessous sont absents : ces instructions décrivent une configuration à mettre en place, pas un déploiement déjà opérationnel.
+Ces étapes nécessitent les droits de gestion du dépôt :
 
-Le chemin prévu pour le workflow de déploiement est :
+1. Dans [Settings → Pages](https://github.com/EnzoT454/OptiBuy/settings/pages), sélectionner **GitHub Actions** comme source dans **Build and deployment**.
+2. Envoyer les changements de `partieHamza` sur GitHub, puis ouvrir une pull request vers `main`. Le workflow **Site de suivi** vérifie la construction.
+3. Fusionner la pull request dans `main`. Le workflow construit puis publie le site automatiquement.
+4. Consulter l’onglet **Actions** et attendre la réussite du travail **Publier sur GitHub Pages**. Le déploiement indique l’adresse du site.
 
-```text
-.github/workflows/docs.yml
-```
+Si les fichiers sont déjà dans `main` au moment de l’activation, lancer **Actions → Site de suivi → Run workflow**, en choisissant `main`.
 
-Une fois GitHub Pages configuré pour utiliser **GitHub Actions**, le déploiement se fait automatiquement lorsque des modifications sont envoyées vers la branche principale du dépôt.
+Le workflow vérifie les envois sur `partieHamza` et les pull requests vers `main`. **Seule la branche `main` publie le site.** Les modifications d’une branche de travail deviennent publiques après leur intégration dans `main` et la réussite du déploiement.
 
-Votre workflow habituel devient donc simplement :
+La branche [`gh-pages` du template](https://github.com/udem-diro/template-projet/tree/gh-pages) contient ses pages déjà générées. Ici, conformément à la [méthode de publication Zensical](https://zensical.org/docs/publish-your-site/), GitHub Actions transmet directement le dossier `site/` à Pages : il n’est pas nécessaire de copier ou de créer cette branche.
 
-```bash
-git add .
-git commit -m "Mise à jour du projet"
-git push
-```
+Si la publication échoue, vérifier la source **GitHub Actions** dans Pages, l’activation des Actions et l’autorisation de déployer depuis `main` dans l’environnement `github-pages`. La disponibilité de Pages dépend aussi de la visibilité du dépôt et du forfait GitHub : consulter la [documentation GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) si l’option est absente.
 
-GitHub se charge ensuite de construire et de publier le site.
+## Maintenir le suivi du cours
 
-## Structure du projet
+Après les rencontres de supervision, habituellement hebdomadaires, noter brièvement le travail réalisé, les difficultés, les décisions et les prochaines étapes. Le suivi doit rendre visibles la démarche, les essais et les apprentissages, en plus des résultats.
 
-```text
-.
-├── .github/
-│   └── workflows/
-│       └── docs.yml          # Construction et déploiement GitHub Pages
-│
-├── docs/
-│   ├── index.md              # Présentation et vue d'ensemble du projet
-│   ├── suivi.md              # Suivi périodique du travail
-│   ├── synthese.md           # Synthèse des travaux et résultats
-│   └── references.md         # Références, ressources et utilisation de l'IA
-│
-├── zensical.toml             # Configuration du site et de la navigation
-├── requirements.txt          # Dépendances Python
-└── site/                     # Site généré lors de la construction
-```
-
-> L'essentiel du contenu que vous aurez à modifier se trouve dans le dossier `docs/`.
-
-## Pages du site
-
-### `index.md` — Présentation du projet
-
-Présente le contexte, le problème abordé, les objectifs du projet, l'équipe ainsi que les principales informations permettant de comprendre le mandat.
-
-### `suivi.md` — Suivi
-
-Documente périodiquement l'évolution du projet, le travail réalisé, les difficultés rencontrées et les prochaines étapes.
-
-Cette page doit être mise à jour **tout au long de la session**.
-
-### `synthese.md` — Synthèse
-
-Présente une vue d'ensemble du travail accompli autour de quatre phases :
-
-1. **Études préliminaires**
-2. **Réalisation**
-3. **Évaluation**
-4. **Bilan**
-
-La structure est volontairement générale afin de pouvoir être adaptée aux différents types de projets.
-
-### `references.md` — Références
-
-Rassemble les principales sources et ressources ayant contribué au projet.
-
-Pour chaque référence importante, précisez brièvement **comment elle a été utilisée ou en quoi elle a influencé le travail réalisé**.
-
-Cette page permet également de documenter l'utilisation d'outils d'**intelligence artificielle** dans le cadre du projet.
-
-## Personnalisation
-
-La configuration principale du site se trouve dans :
-
-```text
-zensical.toml
-```
-
-Vous pouvez notamment y modifier :
-
-* le nom du site ;
-* la navigation ;
-* l'adresse du site publié ;
-* le dépôt Git associé ;
-* les fonctionnalités du thème.
-
-Le contenu des pages se trouve dans `docs/` et est rédigé en Markdown.
-
-Vous pouvez ajouter des pages ou réorganiser la navigation lorsque cela est pertinent pour votre projet.
+Les jalons du cours sont les études préliminaires en semaines 1–2, la réalisation progressive en semaines 3–14, les mises en commun en semaines 5–6, 9–10 et 13–14, puis la présentation finale et le rapport en semaine 15. Le site sera enrichi progressivement pour accompagner ces étapes.
 
 ## Licence
 
-Le README du template annonce une licence MIT. Aucun fichier `LICENSE` n’est présent dans ce dépôt local ; les informations de licence restent à compléter.
-
-## Questions ou problèmes ?
-
-En cas de problème avec le template ou son utilisation, vous pouvez ouvrir une issue sur le dépôt GitHub ou communiquer avec le coordonnateur du cours.
+Le template annonce une licence MIT. Aucun fichier `LICENSE` n’est actuellement présent dans ce dépôt ; les informations de licence restent à compléter.

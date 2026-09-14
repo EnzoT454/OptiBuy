@@ -18,4 +18,4 @@ La description d’OptiBuy a été rédigée : contexte, problématique, objecti
 
 La prochaine étape sera de commencer le développement de l’application mobile et de sa communication avec le serveur.
 
-Cette page sera mise à jour au fil de l’avancement du projet.
+Cette page sera mise à jour chaque semaine avec les avancées, les difficultés, les choix effectués et les prochaines étapes, en lien avec les rencontres de supervision.

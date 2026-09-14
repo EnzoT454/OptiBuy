@@ -1,17 +1,17 @@
 [project]
-site_name = "Site de suivi &ndash; Projet IFT3150"
-site_description = "Template de site web pour le cours IFT3150"
-site_author = "Louis-Edouard Lafontant"
-site_url = "https://ift3150-template.github.io"
+site_name = "OptiBuy — Suivi du projet IFT3150"
+site_description = "Planification des repas et des achats : présentation et avancement du projet OptiBuy."
+site_author = "Hamza Aqel et Nouh Harfouche"
+site_url = "https://enzot454.github.io/OptiBuy/"
 
 copyright = """
-&copy; 2026 <b>DIRO</b> &ndash; Template de site pour le cours IFT3150 <br>
+&copy; 2026 Hamza Aqel et Nouh Harfouche &ndash; Projet IFT3150 <br>
 Département d'informatique et de recherche opérationnelle <br>
 Université de Montréal
 """
 
-repo_name = "ift3150-template"
-repo_url = "https://github.com/ift3150-template/ift3150-template.github.io"
+repo_name = "EnzoT454/OptiBuy"
+repo_url = "https://github.com/EnzoT454/OptiBuy"
 
 # edit_uri = "edit/main/docs/"
 
