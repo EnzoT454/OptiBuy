@@ -1,0 +1,182 @@
+{
+  "info": {
+    "name": "OptiBuy — épiceries.ca",
+    "description": "Serveur local requis : EPICERIES_ENABLED=true. Exécuter dans l’ordre ; les appels valides contactent épiceries.ca. Pas de clé. Le filtre store de recherche désigne l’enseigne la moins chère, pas tout son catalogue. Les tests valident le contrat, pas les prix en magasin.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8001"
+    },
+    {
+      "key": "product_id",
+      "value": "KmGS0CjUfXoy"
+    }
+  ],
+  "item": [
+    {
+      "name": "1 — Serveur",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/health"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Serveur disponible\", () => pm.expect(pm.response.json().status).to.eql(\"ok\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "2 — Catégories",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/sources/epiceries/categories"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Liste de catégories\", () => pm.expect(pm.response.json().data.categories).to.be.an(\"array\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "3 — Recherche et sélection du produit",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/sources/epiceries/search?q=riz&limit=3"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const body = pm.response.json();",
+              "pm.test(\"Résultats disponibles\", () => pm.expect(body.data.results.length).to.be.above(0));",
+              "if (body.data.results.length) pm.collectionVariables.set(\"product_id\", body.data.results[0].id);",
+              "pm.test(\"Pagination\", () => pm.expect(body.data.hasMore).to.be.a(\"boolean\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "4 — Détail normalisé",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/sources/epiceries/products/{{product_id}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const body = pm.response.json();",
+              "pm.test(\"Contrat v1\", () => pm.expect(body.schema_version).to.eql(\"1.0\"));",
+              "pm.test(\"Prix par enseigne\", () => { pm.expect(body.offers).to.be.an(\"array\").that.is.not.empty; body.offers.forEach(o => { pm.expect(o.price.amount).to.be.a(\"string\"); pm.expect(o.price.currency).to.eql(\"CAD\"); pm.expect(o.valid_to).to.eql(null); pm.expect(o.store_id).to.eql(null); pm.expect(o.quality.status).to.eql(\"review_required\"); }); });",
+              "pm.collectionVariables.set(\"previous_retrieved_at\", body.source.retrieved_at);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "5 — Même détail depuis le cache",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/sources/epiceries/products/{{product_id}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Cache sans changer la date de récupération\", () => { const s = pm.response.json().source; pm.expect(s.cached).to.eql(true); pm.expect(s.retrieved_at).to.eql(pm.collectionVariables.get(\"previous_retrieved_at\")); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "6 — Filtre manquant",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/sources/epiceries/search"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 422\", () => pm.response.to.have.status(422));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "7 — Enseigne invalide",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/sources/epiceries/search?q=lait&store=inconnu"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 422\", () => pm.response.to.have.status(422));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "8 — Limite excessive",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/sources/epiceries/search?q=lait&limit=101"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 422\", () => pm.response.to.have.status(422));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

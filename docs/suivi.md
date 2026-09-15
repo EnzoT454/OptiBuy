@@ -16,6 +16,8 @@ title: Suivi du projet
 
 La description d’OptiBuy a été rédigée : contexte, problématique, objectifs, méthodologie et critères d’évaluation. Le site de suivi a été adapté aux consignes du cours.
 
-La prochaine étape sera de commencer le développement de l’application mobile et de sa communication avec le serveur.
+Une première API FastAPI intègre épiceries.ca comme source optionnelle de prix. La recherche et la normalisation sont testées ; les prix anciens ou incohérents sont signalés. Les essais sur les circulaires PDF ont montré des difficultés de lecture des prix.
+
+La prochaine étape sera de vérifier un échantillon de prix et de relier l’application mobile au serveur.
 
 Cette page sera mise à jour chaque semaine avec les avancées, les difficultés, les choix effectués et les prochaines étapes, en lien avec les rencontres de supervision.

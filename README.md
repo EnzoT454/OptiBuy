@@ -1,12 +1,12 @@
 # OptiBuy — Projet IFT3150
 
-OptiBuy est un projet d’application mobile pour gérer des recettes, planifier les repas et préparer une liste d’épicerie par magasin selon un budget. Le dépôt contient actuellement le site de suivi ; l’application reste à développer.
+OptiBuy est un projet d’application mobile pour gérer des recettes, planifier les repas et préparer une liste d’épicerie par magasin selon un budget. Le dépôt contient le site de suivi et un premier serveur FastAPI avec une source de prix optionnelle épiceries.ca. L’application mobile reste à développer.
 
 Projet réalisé par **Hamza Aqel et Nouh Harfouche**, à l’Université de Montréal, à l’automne 2026.
 
 ## Site de suivi
 
-**Adresse prévue après activation et premier déploiement :** [enzot454.github.io/OptiBuy](https://enzot454.github.io/OptiBuy/).
+**Site publié :** [enzot454.github.io/OptiBuy](https://enzot454.github.io/OptiBuy/).
 
 C’est le lien du site publié qu’il faudra déposer sur StudiUM. Vérifier qu’il fonctionne sans connexion à GitHub avant de le remettre.
 
@@ -68,6 +68,27 @@ Si la publication échoue, vérifier la source **GitHub Actions** dans Pages, l�
 Après les rencontres de supervision, habituellement hebdomadaires, noter brièvement le travail réalisé, les difficultés, les décisions et les prochaines étapes. Le suivi doit rendre visibles la démarche, les essais et les apprentissages, en plus des résultats.
 
 Les jalons du cours sont les études préliminaires en semaines 1–2, la réalisation progressive en semaines 3–14, les mises en commun en semaines 5–6, 9–10 et 13–14, puis la présentation finale et le rapport en semaine 15. Le site sera enrichi progressivement pour accompagner ces étapes.
+
+## Backend et données
+
+Le connecteur **épiceries.ca** permet de consulter les catégories, rechercher
+des produits et obtenir des observations de prix normalisées, avec provenance,
+dates et avertissements. Il complète les autres sources prévues.
+
+Consulter le [guide du backend](backend/README.md) pour le lancement, les routes,
+le format JSON et les limites, ainsi que la
+[collection Postman](backend/postman/OptiBuy.postman_collection.json) pour les essais.
+Le backend se lance séparément du site GitHub Pages.
+
+```bash
+source .venv/bin/activate
+python -m pip install -r backend/requirements-dev.txt
+export EPICERIES_ENABLED=true
+python -m uvicorn backend.app.main:app --reload --port 8001
+```
+
+Tests sans réseau : `python -m pytest backend/tests -q`.
+Test explicite de trois lectures réelles : `python -m backend.smoke`.
 
 ## Licence
 
